@@ -100,11 +100,14 @@
           <keyword>true</keyword>
           <keyword>false</keyword>
           <keyword>skip</keyword>
+          <keyword>of</keyword>
+          <keyword>ltl</keyword>
         </context>
 
         <context id="types" style-ref="type">
           <keyword>bit</keyword>
           <keyword>bool</keyword>
+          <keyword>byte</keyword>
           <keyword>char</keyword>
           <keyword>const</keyword>
           <keyword>double</keyword>
@@ -120,6 +123,7 @@
           <keyword>union</keyword>
           <keyword>unsigned</keyword>
           <keyword>void</keyword>
+          <keyword>chan</keyword>
         </context>
 
         <context id="if0-comment" style-ref="comment">
