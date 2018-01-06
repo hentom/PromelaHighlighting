@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="promela" _name="Promela" version="2.0" _section="Source">
+  <metadata>
+    <property name="mimetypes">text/plain;text/x-pml;application/spin</property>
+    <property name="globs">*.pml</property>
+  </metadata>
+
+  <styles>
+    <style id="comment" _name="Comment" map-to="def:comment"/>
+    <style id="string" _name="String" map-to="def:string"/>
+    <style id="escaped-character" _name="Escaped Character" map-to="def:special-char"/>
+    <style id="preprocessor" _name="Preprocessor" map-to="def:preprocessor"/>
+    <style id="included-file" _name="Included File" map-to="def:string"/>
+    <style id="char" _name="Character" map-to="def:character"/>
+    <style id="keyword" _name="Keyword" map-to="def:keyword"/>
+    <style id="type" _name="Data Type" map-to="def:type"/>
+  </styles>
+
+  <definitions>
+    <context id="promela">
+      <include>
+        <context id="comment" style-ref="comment">
+          <start>\/\/</start>
+          <end>$</end>
+        </context>
+
+        <context id="string" end-at-line-end="true" style-ref="string">
+          <start>"</start>
+          <end>"</end>
+          <include>
+            <context id="escape" style-ref="escaped-character">
+              <match>\\.</match>
+            </context>
+          </include>
+        </context>
+
+        <context id="comment-multiline" style-ref="comment">
+          <start>\/\*</start>
+          <end>\*\/</end>
+          <include>
+            <context ref="def:in-comment"/>
+          </include>
+        </context>
+
+        <context id="char" end-at-line-end="true" style-ref="string">
+          <start>'</start>
+          <end>'</end>
+          <include>
+            <context ref="escape"/>
+          </include>
+        </context>
+
+        <context ref="def:decimal"/>
+        <context ref="def:float"/>
+
+        <context id="keywords" style-ref="keyword">
+          <keyword>if</keyword>
+          <keyword>else</keyword>
+          <keyword>fi</keyword>
+          <keyword>do</keyword>
+          <keyword>break</keyword>
+          <keyword>od</keyword>
+          <keyword>for</keyword>
+          <keyword>in</keyword>
+          <keyword>active</keyword>
+          <keyword>proctype</keyword>
+          <keyword>never</keyword>
+          <keyword>trace</keyword>
+          <keyword>notrace</keyword>
+          <keyword>goto</keyword>
+          <keyword>typedef</keyword>
+          <keyword>priority</keyword>
+          <keyword>mtype</keyword>
+          <keyword>provided</keyword>
+          <keyword>hidden</keyword>
+          <keyword>shown</keyword>
+          <keyword>unless</keyword>
+          <keyword>eval</keyword>
+          <keyword>atomic</keyword>
+          <keyword>d_step</keyword>
+          <keyword>select</keyword>
+          <keyword>printf</keyword>
+          <keyword>printm</keyword>
+          <keyword>assert</keyword>
+          <keyword>c_code</keyword>
+          <keyword>c_expr</keyword>
+          <keyword>c_decl</keyword>
+          <keyword>c_track</keyword>
+          <keyword>c_state</keyword>
+          <keyword>len</keyword>
+          <keyword>run</keyword>
+          <keyword>timeout</keyword>
+          <keyword>enabled</keyword>
+          <keyword>np_</keyword>
+          <keyword>pc_value</keyword>
+          <keyword>full</keyword>
+          <keyword>empty</keyword>
+          <keyword>nfull</keyword>
+          <keyword>nempty</keyword>
+          <keyword>true</keyword>
+          <keyword>false</keyword>
+          <keyword>skip</keyword>
+        </context>
+
+        <context id="types" style-ref="type">
+          <keyword>bit</keyword>
+          <keyword>bool</keyword>
+          <keyword>char</keyword>
+          <keyword>const</keyword>
+          <keyword>double</keyword>
+          <keyword>enum</keyword>
+          <keyword>float</keyword>
+          <keyword>int</keyword>
+          <keyword>long</keyword>
+          <keyword>short</keyword>
+          <keyword>signed</keyword>
+          <keyword>static</keyword>
+          <keyword>struct</keyword>
+          <keyword>typedef</keyword>
+          <keyword>union</keyword>
+          <keyword>unsigned</keyword>
+          <keyword>void</keyword>
+        </context>
+
+        <context id="if0-comment" style-ref="comment">
+          <start>^#if 0\b</start>
+          <end>^#(endif|else|elif)\b</end>
+          <include>
+            <context id="if-in-if0">
+              <start>^#if(n?def)?\b</start>
+              <end>^#endif\b</end>
+              <include>
+                <context ref="if-in-if0"/>
+              </include>
+            </context>
+          </include>
+        </context>
+
+        <context id="preprocessor" style-ref="preprocessor">
+          <prefix>^#</prefix>
+          <keyword>define</keyword>
+          <keyword>undef</keyword>
+          <keyword>if(n?def)?</keyword>
+          <keyword>else</keyword>
+          <keyword>elif</keyword>
+          <keyword>endif</keyword>
+        </context>
+
+        <context id="include" style-ref="preprocessor">
+          <match>^#include (".*"|&lt;.*&gt;)</match>
+          <include>
+            <context id="included-file"
+                     sub-pattern="1"
+                     style-ref="included-file"/>
+          </include>
+        </context>
+      </include>
+    </context>
+  </definitions>
+</language>
