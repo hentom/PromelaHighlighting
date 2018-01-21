@@ -14,6 +14,7 @@
     <style id="char" _name="Character" map-to="def:character"/>
     <style id="keyword" _name="Keyword" map-to="def:keyword"/>
     <style id="type" _name="Data Type" map-to="def:type"/>
+    <style id="constant" _name="Constant" map-to="def:constant"/>
   </styles>
 
   <definitions>
@@ -89,16 +90,6 @@
           <keyword>c_state</keyword>
           <keyword>len</keyword>
           <keyword>run</keyword>
-          <keyword>timeout</keyword>
-          <keyword>enabled</keyword>
-          <keyword>np_</keyword>
-          <keyword>pc_value</keyword>
-          <keyword>full</keyword>
-          <keyword>empty</keyword>
-          <keyword>nfull</keyword>
-          <keyword>nempty</keyword>
-          <keyword>true</keyword>
-          <keyword>false</keyword>
           <keyword>skip</keyword>
           <keyword>of</keyword>
           <keyword>ltl</keyword>
@@ -124,6 +115,19 @@
           <keyword>unsigned</keyword>
           <keyword>void</keyword>
           <keyword>chan</keyword>
+        </context>
+        
+        <context id="constants" style-ref="constant">
+          <keyword>timeout</keyword>
+          <keyword>enabled</keyword>
+          <keyword>np_</keyword>
+          <keyword>pc_value</keyword>
+          <keyword>full</keyword>
+          <keyword>empty</keyword>
+          <keyword>nfull</keyword>
+          <keyword>nempty</keyword>
+          <keyword>true</keyword>
+          <keyword>false</keyword>
         </context>
 
         <context id="if0-comment" style-ref="comment">
